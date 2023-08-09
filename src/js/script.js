@@ -25,7 +25,6 @@ const init = async () => {
   };
 window.addEventListener('DOMContentLoaded', init);
 
-
 section.addEventListener('click', function(e){
     if(!e.target.closest('.add-btn')) return;
     let id = e.target.closest('article').dataset.id
