@@ -13,8 +13,14 @@ function closeCart(){
 
  function displayCartItems(added){
     cart.querySelector('.drawer__items').innerHTML = added.map(elem=>{
+        let img;
+        if(elem.item.images.length) img = elem.item.images[0].src;
+        else img = 'https://s3-symbol-logo.tradingview.com/shopify--600.png';
+
         return `<div class='drawer__item flex gap-[18px]' data-id=${elem.item.id}>
-              <div class='drawer__img w-[74px] h-[74px] rounded border border-grey'></div>
+              <div class='drawer__img w-[74px] h-[74px] rounded border border-grey'>
+                <img src=${img} alt='product' class='object-cover m-w-fill m-h-fill'>
+              </div>
               <div class='drawer__info flex-1 flex flex-col gap-[12px]'> 
                 <p>Product Name</p>
                 <p>${elem.item.variants[0].price} KR.</p>

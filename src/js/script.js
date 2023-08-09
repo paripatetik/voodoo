@@ -4,7 +4,7 @@ import  paginate from "./functions/paginate.js";
 import { openCart, closeCart, displayCartItems } from "./functions/cart.js";
 
 let items = 250;
-let perPage = 24;
+let perPage = 12;
 let pages = Math.ceil(items/perPage);
 let currentPage = 1;
 let added = [];
@@ -22,6 +22,10 @@ const init = async () => {
         displayItems(prods, currentPage, perPage);
         pagination.innerHTML = paginate(currentPage, pages);
     }
+    if(localStorage.length) {
+        added = JSON.parse(localStorage.getItem('items'));
+        displayCartItems(added);
+    }
   };
 window.addEventListener('DOMContentLoaded', init);
 
@@ -33,6 +37,7 @@ section.addEventListener('click', function(e){
         let item = prods.products.find(e=> e.id == +id);
         added.push({item, amount:1})
     } 
+    localStorage.setItem('items', JSON.stringify(added));
     displayCartItems(added)
 });
 
@@ -71,7 +76,10 @@ cart.addEventListener('click', function(e){
         console.log('asd')
         added = added.filter(elem=> elem.item.id !==+id);
     }
+    console.log('jeu')
+    localStorage.setItem('items', JSON.stringify(added));
     displayCartItems(added);
+    
  });
 
 
